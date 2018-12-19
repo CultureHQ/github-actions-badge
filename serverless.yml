@@ -1,4 +1,4 @@
-service: upload-signer
+service: github-actions-badge
 
 provider:
   name: aws
