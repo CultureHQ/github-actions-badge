@@ -6,9 +6,6 @@ const getRedirect = require("./getRedirect");
 app.use((request, response, next) => {
   console.log(`[${new Date().toUTCString()}] ${request.method} ${request.path}`);
 
-  response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET");
-
   next();
 });
 
