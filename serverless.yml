@@ -9,7 +9,6 @@ provider:
 package:
   exclude:
   - coverage/
-  - node_modules/
   - server.js
   - test/
 

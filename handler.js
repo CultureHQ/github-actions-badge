@@ -15,7 +15,7 @@ const handle = (event, context, callback) => (
       } else {
         callback(null, { statusCode: 500 });
       }
-    });
+    })
 );
 
 module.exports = { handle };
