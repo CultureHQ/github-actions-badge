@@ -1,0 +1,19 @@
+{
+  "name": "github-actions-badge",
+  "version": "0.1.0",
+  "description": "A README badge for GitHub Actions status",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CultureHQ/github-actions-badge.git"
+  },
+  "author": "Kevin Deisz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CultureHQ/github-actions-badge/issues"
+  },
+  "homepage": "https://github.com/CultureHQ/github-actions-badge#readme"
+}
