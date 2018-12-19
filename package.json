@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/CultureHQ/github-actions-badge/issues"
   },
-  "homepage": "https://github.com/CultureHQ/github-actions-badge#readme"
+  "homepage": "https://github.com/CultureHQ/github-actions-badge#readme",
+  "devDependencies": {
+    "express": "^4.16.4"
+  }
 }
