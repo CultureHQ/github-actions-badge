@@ -13,7 +13,7 @@ app.get("/:owner/:repo", (request, response) => {
   getRedirect(request.params.owner, request.params.repo)
     .then(redirect => {
       response.header("Cache-Control", "no-cache");
-      response.redirect(redirect);
+      response.redirect(303, redirect);
     })
     .catch(error => {
       if (error.message.startsWith("Could not find")) {

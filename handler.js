@@ -3,7 +3,7 @@ const getRedirect = require("./getRedirect");
 const handle = (event, context, callback) => (
   getRedirect(event.pathParameters.owner, event.pathParameters.repo)
     .then(redirect => callback(null, {
-      statusCode: 301,
+      statusCode: 303,
       headers: {
         "Cache-Control": "no-cache",
         Location: redirect
