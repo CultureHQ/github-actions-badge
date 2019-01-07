@@ -42,14 +42,17 @@ const STATUS_COLORS = {
   error: "red",
   failure: "lightgrey",
   pending: "yellow",
-  success: "green"
+  success: "green",
+  no_runs: "lightgrey"
 };
 
 const getRedirectURL = status => {
-  const base = "https://img.shields.io/badge";
+  const normal = status || "no_runs";
+
+  const base = "https://img.shields.io/badge/GitHub_Actions";
   const query = "?logo=github&logoColor=white";
 
-  return `${base}/GitHub_Actions-${status}-${STATUS_COLORS[status]}.svg${query}`;
+  return `${base}-${normal}-${STATUS_COLORS[normal]}.svg${query}`;
 };
 
 const getRedirect = (owner, repo) => (

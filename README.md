@@ -14,6 +14,7 @@ The badge variants look like:
 * Failure - ![Failure](https://img.shields.io/badge/GitHub_Actions-failure-lightgrey.svg?logo=github&logoColor=white)
 * Pending - ![Pending](https://img.shields.io/badge/GitHub_Actions-pending-yellow.svg?logo=github&logoColor=white)
 * Success - ![Success](https://img.shields.io/badge/GitHub_Actions-success-green.svg?logo=github&logoColor=white)
+* No Runs - ![No Runs](https://img.shields.io/badge/GitHub_Actions-no_runs-lightgrey.svg?logo=github&logoColor=white)
 
 ## Development
 
