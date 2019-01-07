@@ -38,6 +38,25 @@ const getStatus = checkSuites => {
   return matched.conclusion;
 };
 
+const OPTIONS = ["style", "logo", "label", "logoColor", "logoWidth", "link", "colorA", "colorB", "maxAge"];
+
+const getQueryParams = options => OPTIONS.reduce((accum, key) => {
+  const normal = options[key] || accum[key] || null;
+
+  if (normal) {
+    return { ...accum, [key]: normal };
+  }
+  return accum;
+}, { logo: "github", logoColor: "white" });
+
+const getQuery = options => {
+  const params = getQueryParams(options);
+
+  return Object.keys(params).reduce((accum, key, index) => (
+    `${accum}${index === 0 ? "?" : "&"}${key}=${params[key]}`
+  ), "");
+};
+
 const STATUS_COLORS = {
   error: "red",
   failure: "lightgrey",
@@ -46,17 +65,15 @@ const STATUS_COLORS = {
   no_runs: "lightgrey"
 };
 
-const getRedirectURL = status => {
+const getRedirectURL = options => status => {
+  const base = "https://img.shields.io/badge/GitHub_Actions";
   const normal = status || "no_runs";
 
-  const base = "https://img.shields.io/badge/GitHub_Actions";
-  const query = "?logo=github&logoColor=white";
-
-  return `${base}-${normal}-${STATUS_COLORS[normal]}.svg${query}`;
+  return `${base}-${normal}-${STATUS_COLORS[normal]}.svg${getQuery(options)}`;
 };
 
-const getRedirect = (owner, repo) => (
-  getCheckSuites(owner, repo).then(getStatus).then(getRedirectURL)
+const getRedirect = (owner, repo, options) => (
+  getCheckSuites(owner, repo).then(getStatus).then(getRedirectURL(options))
 );
 
 module.exports = getRedirect;

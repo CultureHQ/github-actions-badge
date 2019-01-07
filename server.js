@@ -10,7 +10,7 @@ app.use((request, response, next) => {
 });
 
 app.get("/:owner/:repo", (request, response) => {
-  getRedirect(request.params.owner, request.params.repo)
+  getRedirect(request.params.owner, request.params.repo, request.query)
     .then(redirect => {
       response.header("Cache-Control", "no-cache");
       response.redirect(303, redirect);

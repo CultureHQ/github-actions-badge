@@ -1,7 +1,7 @@
 const getRedirect = require("./getRedirect");
 
 const handle = (event, context, callback) => (
-  getRedirect(event.pathParameters.owner, event.pathParameters.repo)
+  getRedirect(event.pathParameters.owner, event.pathParameters.repo, event.queryStringParameters)
     .then(redirect => callback(null, {
       statusCode: 303,
       headers: {
