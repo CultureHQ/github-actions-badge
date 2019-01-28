@@ -73,7 +73,7 @@ const getRedirectURL = options => status => {
 };
 
 const getRedirect = (owner, repo, options) => (
-  getCheckSuites(owner, repo).then(getStatus).then(getRedirectURL(options))
+  getCheckSuites(owner, repo).then(getStatus).then(getRedirectURL(options || {}))
 );
 
 module.exports = getRedirect;
