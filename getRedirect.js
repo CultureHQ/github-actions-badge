@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const https = require("https");
 
 const getCheckSuites = (owner, repo) => new Promise((resolve, reject) => {
@@ -38,7 +39,10 @@ const getStatus = checkSuites => {
   return matched.conclusion;
 };
 
-const OPTIONS = ["style", "logo", "label", "logoColor", "logoWidth", "link", "colorA", "colorB", "maxAge", "cacheSeconds"];
+const OPTIONS = [
+  "style", "logo", "label", "logoColor", "logoWidth", "link", "colorA",
+  "colorB", "maxAge", "cacheSeconds"
+];
 
 const getQueryParams = options => OPTIONS.reduce((accum, key) => {
   const normal = options[key] || accum[key] || null;
@@ -65,15 +69,23 @@ const STATUS_COLORS = {
   no_runs: "lightgrey"
 };
 
-const getRedirectURL = options => status => {
+const makeRedirect = options => status => {
   const base = "https://img.shields.io/badge/GitHub_Actions";
   const normal = status || "no_runs";
+  const query = getQuery(options);
 
-  return `${base}-${normal}-${STATUS_COLORS[normal]}.svg${getQuery(options)}`;
+  const hash = crypto.createHash("md5");
+  hash.update(normal);
+  hash.update(query);
+
+  return {
+    url: `${base}-${normal}-${STATUS_COLORS[normal]}.svg${query}`,
+    etag: `"${hash.digest("hex")}"`
+  };
 };
 
 const getRedirect = (owner, repo, options) => (
-  getCheckSuites(owner, repo).then(getStatus).then(getRedirectURL(options || {}))
+  getCheckSuites(owner, repo).then(getStatus).then(makeRedirect(options || {}))
 );
 
 module.exports = getRedirect;

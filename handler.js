@@ -2,11 +2,12 @@ const getRedirect = require("./getRedirect");
 
 const handle = (event, context, callback) => (
   getRedirect(event.pathParameters.owner, event.pathParameters.repo, event.queryStringParameters)
-    .then(redirect => callback(null, {
+    .then(({ url, etag }) => callback(null, {
       statusCode: 303,
       headers: {
         "Cache-Control": "no-cache",
-        Location: redirect
+        "ETag": etag,
+        Location: url
       }
     }))
     .catch(error => {
