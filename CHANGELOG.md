@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 ### Added
 - Serve the ETag header for the content so that GitHub READMEs will properly bust.
+- Another action for getting the URL of the latest run.
 
 ## [0.1.0] - 2019-03-12
 ### Added

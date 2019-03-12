@@ -1,7 +1,8 @@
 const getRedirect = require("./getRedirect");
+const { getLatestRunURL } = require("./githubClient");
 
-const handle = (event, context, callback) => (
-  getRedirect(event.pathParameters.owner, event.pathParameters.repo, event.queryStringParameters)
+const process = (promise, callback) => (
+  promise
     .then(({ url, etag }) => callback(null, {
       statusCode: 303,
       headers: {
@@ -18,5 +19,17 @@ const handle = (event, context, callback) => (
       }
     })
 );
+
+const handle = (event, context, callback) => {
+  if (event.path.startsWith("/badge")) {
+    return process(getRedirect(event.pathParameters.owner, event.pathParameters.repo, event.queryStringParameters), callback);
+  }
+
+  if (event.path.startsWith("/results")) {
+    return process(getLatestRunURL(event.pathParameters.owner, event.pathParameters.repo), callback);
+  }
+
+  callback(null, { statusCode: 404 });
+};
 
 module.exports = { handle };

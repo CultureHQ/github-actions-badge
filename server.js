@@ -2,15 +2,10 @@ const express = require("express");
 const app = express();
 
 const getRedirect = require("./getRedirect");
+const { getLatestRunURL } = require("./githubClient");
 
-app.use((request, response, next) => {
-  console.log(`[${new Date().toUTCString()}] ${request.method} ${request.path}`);
-
-  next();
-});
-
-app.get("/:owner/:repo", (request, response) => {
-  getRedirect(request.params.owner, request.params.repo, request.query)
+const process = (promise, response) => (
+  promise
     .then(({ url, etag }) => {
       response.header("Cache-Control", "no-cache");
       response.header("ETag", etag);
@@ -22,7 +17,21 @@ app.get("/:owner/:repo", (request, response) => {
       } else {
         response.status(500).send(error.message);
       }
-    });
+    })
+);
+
+app.use((request, response, next) => {
+  console.log(`[${new Date().toUTCString()}] ${request.method} ${request.path}`);
+
+  next();
+});
+
+app.get("/:owner/:repo", (request, response) => {
+  process(getRedirect(request.params.owner, request.params.repo, request.query), response);
+});
+
+app.get("/results/:owner/:repo", (request, response) => {
+  process(getLatestRunURL(request.params.owner, request.params.repo), response);
 });
 
 app.listen(8080, () => console.log("Listening on port 8080..."));
