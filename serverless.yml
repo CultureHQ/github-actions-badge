@@ -19,3 +19,6 @@ functions:
     - http:
         path: badge/{owner}/{repo}
         method: get
+    - http:
+        path: results/{owner}/{repo}
+        method: get
