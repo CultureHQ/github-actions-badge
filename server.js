@@ -11,9 +11,10 @@ app.use((request, response, next) => {
 
 app.get("/:owner/:repo", (request, response) => {
   getRedirect(request.params.owner, request.params.repo, request.query)
-    .then(redirect => {
+    .then(({ url, etag }) => {
       response.header("Cache-Control", "no-cache");
-      response.redirect(303, redirect);
+      response.header("ETag", etag);
+      response.redirect(303, url);
     })
     .catch(error => {
       if (error.message.startsWith("Could not find")) {
