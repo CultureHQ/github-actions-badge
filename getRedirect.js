@@ -38,7 +38,7 @@ const getStatus = checkSuites => {
   return matched.conclusion;
 };
 
-const OPTIONS = ["style", "logo", "label", "logoColor", "logoWidth", "link", "colorA", "colorB", "maxAge"];
+const OPTIONS = ["style", "logo", "label", "logoColor", "logoWidth", "link", "colorA", "colorB", "maxAge", "cacheSeconds"];
 
 const getQueryParams = options => OPTIONS.reduce((accum, key) => {
   const normal = options[key] || accum[key] || null;
