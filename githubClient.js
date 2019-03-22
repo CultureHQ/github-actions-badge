@@ -8,6 +8,7 @@ const makeRequest = path => new Promise((resolve, reject) => {
     method: "GET",
     headers: {
       Accept: "application/vnd.github.antiope-preview+json",
+      // Authorization: "token TOKEN",
       "User-Agent": "node"
     }
   };
