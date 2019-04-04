@@ -20,5 +20,11 @@ functions:
         path: badge/{owner}/{repo}
         method: get
     - http:
+        path: badge/{owner}/{repo}/{branch}
+        method: get
+    - http:
         path: results/{owner}/{repo}
+        method: get
+    - http:
+        path: results/{owner}/{repo}/{branch}
         method: get

@@ -42,12 +42,13 @@ const findCheckSuite = parsed => {
   return matched;
 };
 
-const getCheckSuite = (owner, repo) => (
-  makeRequest(`/repos/${owner}/${repo}/commits/master/check-suites`).then(findCheckSuite)
-);
+const getCheckSuite = (owner, repo, branch) => {
+  branch = branch || 'master'
+  return makeRequest(`/repos/${owner}/${repo}/commits/${branch}/check-suites`).then(findCheckSuite)
+};
 
-const getLatestRunURL = (owner, repo) => (
-  getCheckSuite(owner, repo)
+const getLatestRunURL = (owner, repo, branch) => (
+  getCheckSuite(owner, repo, branch)
     .then(checkSuite => makeRequest(checkSuite.check_runs_url))
     .then(response => ({
       url: response.check_runs[0].html_url,

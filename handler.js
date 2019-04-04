@@ -22,11 +22,16 @@ const process = (promise, callback) => (
 
 const handle = (event, context, callback) => {
   if (event.path.startsWith("/badge")) {
-    return process(getRedirect(event.pathParameters.owner, event.pathParameters.repo, event.queryStringParameters), callback);
+    return process(getRedirect(event.pathParameters.owner,
+                               event.pathParameters.repo,
+                               event.queryStringParameters,
+                               event.pathParameters.branch), callback);
   }
 
   if (event.path.startsWith("/results")) {
-    return process(getLatestRunURL(event.pathParameters.owner, event.pathParameters.repo), callback);
+    return process(getLatestRunURL(event.pathParameters.owner,
+                                   event.pathParameters.repo,
+                                   event.pathParameters.branch), callback);
   }
 
   callback(null, { statusCode: 404 });

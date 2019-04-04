@@ -46,8 +46,8 @@ const makeRedirect = options => checkSuite => {
   };
 };
 
-const getRedirect = (owner, repo, options) => (
-  getCheckSuite(owner, repo).then(makeRedirect(options || {}))
+const getRedirect = (owner, repo, options, branch) => (
+  getCheckSuite(owner, repo, branch).then(makeRedirect(options || {}))
 );
 
 module.exports = getRedirect;
