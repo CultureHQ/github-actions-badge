@@ -25,13 +25,13 @@ const handle = (event, context, callback) => {
     return process(getRedirect(event.pathParameters.owner,
                                event.pathParameters.repo,
                                event.queryStringParameters,
-                               event.pathParameters.branch), callback);
+                               event.queryStringParameters.branch), callback);
   }
 
   if (event.path.startsWith("/results")) {
     return process(getLatestRunURL(event.pathParameters.owner,
                                    event.pathParameters.repo,
-                                   event.pathParameters.branch), callback);
+                                   event.queryStringParameters.branch), callback);
   }
 
   callback(null, { statusCode: 404 });

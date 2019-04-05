@@ -16,6 +16,7 @@ const getQueryParams = options => OPTIONS.reduce((accum, key) => {
 }, { logo: "github", logoColor: "white" });
 
 const getQuery = options => {
+  delete options.branch
   const params = getQueryParams(options);
 
   return Object.keys(params).reduce((accum, key, index) => (
