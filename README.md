@@ -12,6 +12,13 @@ where `{owner}` and `{repo}` are replaced by the github username and the reposit
 https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/CultureHQ/github-actions-badge
 ```
 
+Optionally a branch can be specified using the `branch` query parameter.
+Without this parameter, it will use the `master` branch.
+
+```
+https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/{owner}/{repo}?branch={branch}
+```
+
 The badge variants look like:
 
 * ![Error](https://img.shields.io/badge/GitHub_Actions-error-red.svg?logo=github&logoColor=white)

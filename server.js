@@ -26,12 +26,17 @@ app.use((request, response, next) => {
   next();
 });
 
-app.get("/:owner/:repo", (request, response) => {
-  process(getRedirect(request.params.owner, request.params.repo, request.query), response);
+app.get("/results/:owner/:repo", (request, response) => {
+  process(getLatestRunURL(request.params.owner,
+                          request.params.repo,
+                          request.query.branch), response);
 });
 
-app.get("/results/:owner/:repo", (request, response) => {
-  process(getLatestRunURL(request.params.owner, request.params.repo), response);
+app.get("/:owner/:repo", (request, response) => {
+  process(getRedirect(request.params.owner,
+                      request.params.repo,
+                      request.query,
+                      request.query.branch), response);
 });
 
 app.listen(8080, () => console.log("Listening on port 8080..."));
