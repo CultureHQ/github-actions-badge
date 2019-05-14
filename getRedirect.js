@@ -2,26 +2,39 @@ const crypto = require("crypto");
 const { getCheckSuite } = require("./githubClient");
 
 const OPTIONS = [
-  "style", "logo", "label", "logoColor", "logoWidth", "link", "colorA",
-  "colorB", "maxAge", "cacheSeconds"
+  "style",
+  "logo",
+  "label",
+  "logoColor",
+  "logoWidth",
+  "link",
+  "colorA",
+  "colorB",
+  "maxAge",
+  "cacheSeconds"
 ];
 
-const getQueryParams = options => OPTIONS.reduce((accum, key) => {
-  const normal = options[key] || accum[key] || null;
+const getQueryParams = options =>
+  OPTIONS.reduce(
+    (accum, key) => {
+      const normal = options[key] || accum[key] || null;
 
-  if (normal) {
-    return { ...accum, [key]: normal };
-  }
-  return accum;
-}, { logo: "github", logoColor: "white" });
+      if (normal) {
+        return { ...accum, [key]: normal };
+      }
+      return accum;
+    },
+    { logo: "github", logoColor: "white" }
+  );
 
 const getQuery = options => {
-  delete options.branch
   const params = getQueryParams(options);
 
-  return Object.keys(params).reduce((accum, key, index) => (
-    `${accum}${index === 0 ? "?" : "&"}${key}=${params[key]}`
-  ), "");
+  return Object.keys(params).reduce(
+    (accum, key, index) =>
+      `${accum}${index === 0 ? "?" : "&"}${key}=${params[key]}`,
+    ""
+  );
 };
 
 const STATUS_COLORS = {
@@ -47,8 +60,7 @@ const makeRedirect = options => checkSuite => {
   };
 };
 
-const getRedirect = (owner, repo, options, branch) => (
-  getCheckSuite(owner, repo, branch).then(makeRedirect(options || {}))
-);
+const getRedirect = (owner, repo, options, branch) =>
+  getCheckSuite(owner, repo, branch).then(makeRedirect(options || {}));
 
 module.exports = getRedirect;

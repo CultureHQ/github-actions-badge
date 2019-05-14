@@ -21,11 +21,11 @@ https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/{owner}/
 
 The badge variants look like:
 
-* ![Error](https://img.shields.io/badge/GitHub_Actions-error-red.svg?logo=github&logoColor=white)
-* ![Failure](https://img.shields.io/badge/GitHub_Actions-failure-lightgrey.svg?logo=github&logoColor=white)
-* ![Pending](https://img.shields.io/badge/GitHub_Actions-pending-yellow.svg?logo=github&logoColor=white)
-* ![Success](https://img.shields.io/badge/GitHub_Actions-success-green.svg?logo=github&logoColor=white)
-* ![No Runs](https://img.shields.io/badge/GitHub_Actions-no_runs-lightgrey.svg?logo=github&logoColor=white)
+- ![Error](https://img.shields.io/badge/GitHub_Actions-error-red.svg?logo=github&logoColor=white)
+- ![Failure](https://img.shields.io/badge/GitHub_Actions-failure-critical.svg?logo=github&logoColor=white)
+- ![Pending](https://img.shields.io/badge/GitHub_Actions-pending-yellow.svg?logo=github&logoColor=white)
+- ![Success](https://img.shields.io/badge/GitHub_Actions-success-success.svg?logo=github&logoColor=white)
+- ![No Runs](https://img.shields.io/badge/GitHub_Actions-no_runs-lightgrey.svg?logo=github&logoColor=white)
 
 ## Options
 

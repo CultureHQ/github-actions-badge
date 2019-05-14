@@ -1,10 +1,10 @@
 {
   "name": "github-actions-badge",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A README badge for GitHub Actions status",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "format": "prettier --write *"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CultureHQ/github-actions-badge#readme",
   "devDependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "prettier": "^1.17.1"
   }
 }

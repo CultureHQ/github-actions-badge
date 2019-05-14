@@ -1,39 +1,42 @@
 const https = require("https");
 
-const makeRequest = path => new Promise((resolve, reject) => {
-  const req = {
-    hostname: "api.github.com",
-    port: 443,
-    path,
-    method: "GET",
-    headers: {
-      Accept: "application/vnd.github.antiope-preview+json",
-      // Authorization: "token TOKEN",
-      "User-Agent": "node"
-    }
-  };
-
-  https.get(req, resp => {
-    let data = "";
-
-    resp.on("data", chunk => { data += chunk; });
-    resp.on("error", error => reject(error));
-    resp.on("end", () => {
-      const parsed = JSON.parse(data);
-
-      if (resp.statusCode === 200) {
-        resolve(parsed);
-      } else {
-        reject(parsed);
+const makeRequest = path =>
+  new Promise((resolve, reject) => {
+    const req = {
+      hostname: "api.github.com",
+      port: 443,
+      path,
+      method: "GET",
+      headers: {
+        Accept: "application/vnd.github.antiope-preview+json",
+        // Authorization: "token TOKEN",
+        "User-Agent": "node"
       }
+    };
+
+    https.get(req, resp => {
+      let data = "";
+
+      resp.on("data", chunk => {
+        data += chunk;
+      });
+      resp.on("error", error => reject(error));
+      resp.on("end", () => {
+        const parsed = JSON.parse(data);
+
+        if (resp.statusCode === 200) {
+          resolve(parsed);
+        } else {
+          reject(parsed);
+        }
+      });
     });
   });
-});
 
 const findCheckSuite = parsed => {
-  const matched = parsed.check_suites.find(checkSuite => (
-    checkSuite.app.name === "GitHub Actions"
-  ));
+  const matched = parsed.check_suites.find(
+    checkSuite => checkSuite.app.name === "GitHub Actions"
+  );
 
   if (!matched) {
     throw new Error("Could not find check suite named GitHub Actions");
@@ -42,19 +45,18 @@ const findCheckSuite = parsed => {
   return matched;
 };
 
-const getCheckSuite = (owner, repo, branch) => {
-  branch = branch || 'master'
-  return makeRequest(`/repos/${owner}/${repo}/commits/${branch}/check-suites`).then(findCheckSuite)
-};
+const getCheckSuite = (owner, repo, branch) =>
+  makeRequest(
+    `/repos/${owner}/${repo}/commits/${branch || "master"}/check-suites`
+  ).then(findCheckSuite);
 
-const getLatestRunURL = (owner, repo, branch) => (
+const getLatestRunURL = (owner, repo, branch) =>
   getCheckSuite(owner, repo, branch)
     .then(checkSuite => makeRequest(checkSuite.check_runs_url))
     .then(response => ({
       url: response.check_runs[0].html_url,
       etag: response.check_runs[0].head_sha
-    }))
-);
+    }));
 
 module.exports = {
   getCheckSuite,

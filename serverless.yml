@@ -8,17 +8,17 @@ provider:
 
 package:
   exclude:
-  - coverage/
-  - server.js
-  - test/
+    - coverage/
+    - server.js
+    - test/
 
 functions:
   badge:
     handler: handler.handle
     events:
-    - http:
-        path: badge/{owner}/{repo}
-        method: get
-    - http:
-        path: results/{owner}/{repo}
-        method: get
+      - http:
+          path: badge/{owner}/{repo}
+          method: get
+      - http:
+          path: results/{owner}/{repo}
+          method: get

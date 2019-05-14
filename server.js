@@ -4,7 +4,7 @@ const app = express();
 const getRedirect = require("./getRedirect");
 const { getLatestRunURL } = require("./githubClient");
 
-const process = (promise, response) => (
+const process = (promise, response) =>
   promise
     .then(({ url, etag }) => {
       response.header("Cache-Control", "no-cache");
@@ -17,26 +17,27 @@ const process = (promise, response) => (
       } else {
         response.status(500).send(error.message);
       }
-    })
-);
+    });
 
 app.use((request, response, next) => {
-  console.log(`[${new Date().toUTCString()}] ${request.method} ${request.path}`);
+  const timestamp = new Date().toUTCString();
+  console.log(`[${timestamp}] ${request.method} ${request.path}`);
 
   next();
 });
 
 app.get("/results/:owner/:repo", (request, response) => {
-  process(getLatestRunURL(request.params.owner,
-                          request.params.repo,
-                          request.query.branch), response);
+  const { owner, repo } = request.params;
+  const { branch } = request.query;
+
+  process(getLatestRunURL(owner, repo, branch), response);
 });
 
 app.get("/:owner/:repo", (request, response) => {
-  process(getRedirect(request.params.owner,
-                      request.params.repo,
-                      request.query,
-                      request.query.branch), response);
+  const { owner, repo } = request.params;
+  const { branch, ...query } = request.query;
+
+  process(getRedirect(owner, repo, query, branch), response);
 });
 
 app.listen(8080, () => console.log("Listening on port 8080..."));
