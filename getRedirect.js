@@ -25,9 +25,9 @@ const getQuery = options => {
 
 const STATUS_COLORS = {
   error: "red",
-  failure: "lightgrey",
+  failure: "critical",
   pending: "yellow",
-  success: "green",
+  success: "success",
   no_runs: "lightgrey"
 };
 
