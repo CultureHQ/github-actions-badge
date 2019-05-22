@@ -13,6 +13,8 @@ package:
 functions:
   badge:
     handler: handler.handle
+    environment:
+      GITHUB_TOKEN: ${file(.env.yml):GITHUB_TOKEN}
     events:
       - http:
           path: badge/{owner}/{repo}
