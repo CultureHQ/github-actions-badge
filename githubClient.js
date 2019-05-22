@@ -2,17 +2,20 @@ const https = require("https");
 
 const makeRequest = path =>
   new Promise((resolve, reject) => {
-    const req = {
+    let req = {
       hostname: "api.github.com",
       port: 443,
       path,
       method: "GET",
       headers: {
         Accept: "application/vnd.github.antiope-preview+json",
-        // Authorization: "token TOKEN",
         "User-Agent": "node"
       }
     };
+
+    if (process.env.GITHUB_TOKEN) {
+      req.headers.Authorization = `token ${process.env.GITHUB_TOKEN}`;
+    }
 
     https.get(req, resp => {
       let data = "";

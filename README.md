@@ -37,6 +37,15 @@ For instance, if you wanted to change the style to `flat-square`, you could pass
 [![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/{owner}/{repo}?style=flat-square)](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/results/{owner}/{repo})
 ```
 
+## Status for private repo's
+
+In order for the lambda to get status from Github for private repos, you have to create
+a token with repo access and set that in `.env.yml`.
+
+```shell
+cp .env.yml.example .env.yml
+```
+
 ## Development
 
 To develop locally, install dependencies with `yarn`. Then you can run `yarn start` at the root of the repository to start a local server.
