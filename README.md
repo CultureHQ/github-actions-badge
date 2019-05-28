@@ -37,7 +37,7 @@ For instance, if you wanted to change the style to `flat-square`, you could pass
 [![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/{owner}/{repo}?style=flat-square)](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/results/{owner}/{repo})
 ```
 
-## Status for private repo's
+## Private repositories
 
 In order for the lambda to get status from Github for private repos, you have to create
 a token with repo access and set that in `.env.yml`.
@@ -48,4 +48,12 @@ cp .env.yml.example .env.yml
 
 ## Development
 
-To develop locally, install dependencies with `yarn`. Then you can run `yarn start` at the root of the repository to start a local server.
+To develop locally, install dependencies with `yarn`. Then you can run `yarn start` at the root of the repository to start a local server. To deploy to your AWS environment, run `yarn deploy`.
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/CultureHQ/github-actions-badge.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

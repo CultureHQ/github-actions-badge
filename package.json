@@ -4,6 +4,7 @@
   "description": "A README badge for GitHub Actions status",
   "main": "index.js",
   "scripts": {
+    "deploy": "serverless deploy",
     "format": "prettier --write *"
   },
   "repository": {
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/CultureHQ/github-actions-badge#readme",
   "devDependencies": {
     "express": "^4.17.0",
-    "prettier": "^1.17.1"
+    "prettier": "^1.17.1",
+    "serverless": "^1.44.0"
   }
 }
