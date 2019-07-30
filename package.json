@@ -20,6 +20,6 @@
   "devDependencies": {
     "express": "^4.17.0",
     "prettier": "^1.18.2",
-    "serverless": "^1.48.4"
+    "serverless": "^1.49.0"
   }
 }
